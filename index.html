@@ -55,19 +55,23 @@
     <script defer type="application/javascript" src="composeApp.js"></script>
 
     <script>
-        // Función para ocultar la pantalla cuando TODO esté listo
+        // Función mejorada para conexiones lentas
         window.addEventListener('load', function() {
             const loader = document.getElementById('loading-screen');
             
-            // Esperamos un momento para que Compose se dibuje
+            // Aumentamos el margen de seguridad para conexiones con alta latencia (como en Cuba)
+            // Esto asegura que el archivo .wasm tenga tiempo de procesarse tras la descarga
+            const tiempoSeguridad = 3500; // 3.5 segundos mínimo
+
             setTimeout(() => {
-                loader.style.transition = "opacity 0.5s ease";
+                loader.style.transition = "opacity 0.8s ease-in-out";
                 loader.style.opacity = '0';
+                
                 setTimeout(() => {
                     loader.style.display = 'none';
                     document.body.style.overflow = 'auto';
-                }, 500);
-            }, 1500); 
+                }, 800);
+            }, tiempoSeguridad); 
         });
     </script>
 </body>
